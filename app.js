@@ -1,25 +1,20 @@
 const express = require("express"),
   app = express(),
   bodyParser = require("body-parser"),
-  mongoose = require("mongoose")
+  mongoose = require("mongoose"),
+  PropItem = require("./models/prop"),
+  seedDB = require("./seeds")
 
 mongoose.connect("mongodb://localhost/tiska")
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine", "ejs")
-
-// Schema setup
-const propItemSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String,
-  startingBid: Number,
-})
-
-var PropItem = mongoose.model("PropItem", propItemSchema)
+seedDB()
 
 app.get("/", function(req, res) {
   res.render("landing")
 })
+
+// Routes
 
 //  INDEX - show all props
 app.get("/props", function(req, res) {
@@ -57,7 +52,7 @@ app.post("/props", function (req, res) {
 })
 // SHOW
 app.get("/props/:id", (req,res) => {
-  PropItem.findById(req.params.id, (err, propItem) => {
+  PropItem.findById(req.params.id).populate("comments").exec((err, propItem) => {
     if(err) {
       console.log(err)
     } else {
