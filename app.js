@@ -10,6 +10,14 @@ var props = [
   { name: "Beauty and the Beast Dress", image: "https://www.dhresource.com/600x600/f2/albu/g5/M00/19/6F/rBVaI1jTjDyAHAOuAAW60_EjGQs999.jpg" }
 ]
 
+app.get("/", function(req, res) {
+  res.render("landing")
+})
+
+app.get("/props", function(req, res) {
+  res.render("props", {props})
+})
+
 app.listen(3000, () => {
   console.log("Server running on port 3000...")
 })

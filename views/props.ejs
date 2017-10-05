@@ -1,0 +1,28 @@
+<% include partials/header %>
+
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome to Tiska!</h1>
+            <p>View our extensive of catalog of movie props and costumes!</p>
+            <p>
+                <a class="btn btn-primary btn-large" href="/props/new">Add an item for auction</a>
+            </p>
+        </div>
+    </header>
+
+    <div class="row text-center" style="display: flex; flex-wrap: wrap;">
+        <% props.forEach(function(prop) { %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="<%= prop.image %>">
+                    <div class="caption">
+                        <h4><%= prop.name %></h4>
+                    </div>
+                </div>
+            </div>
+         <% }) %>
+    </div>
+</div>
+
+<% include partials/footer %>
