@@ -18,6 +18,20 @@ app.get("/props", function(req, res) {
   res.render("props", {props})
 })
 
+app.get("/props/new", function (req, res) {
+   res.render("new.ejs");
+});
+
+app.post("/props", function (req, res) {
+    // get data from form and add to props array
+    var name = req.body.name;
+    var image = req.body.image;
+    var newProp = {name: name, image: image};
+    props.push(newProp);
+    // redirect back to campgrounds page
+    res.redirect("/props");
+});
+
 app.listen(3000, () => {
   console.log("Server running on port 3000...")
 })
