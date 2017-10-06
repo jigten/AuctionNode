@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 // Schema setup
 const propItemSchema = new mongoose.Schema({
   name: String,
-  image: String,
+  image: [String],
   description: String,
   startingBid: Number,
   comments: [
