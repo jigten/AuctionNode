@@ -3,6 +3,7 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
   PropItem = require("./models/prop"),
+  Comment = require("./models/comment"),
   seedDB = require("./seeds")
 
 mongoose.connect("mongodb://localhost/tiska")
@@ -22,14 +23,14 @@ app.get("/props", function(req, res) {
       if(err) {
         console.log(err)
       } else {
-        res.render("index", {props})
+        res.render("propItems/index", {props})
       }
   })
 })
 
 // NEW
 app.get("/props/new", function (req, res) {
-   res.render("new.ejs")
+   res.render("propItems/new")
 });
 
 // CREATE
@@ -56,10 +57,42 @@ app.get("/props/:id", (req,res) => {
     if(err) {
       console.log(err)
     } else {
-      res.render("show", {propItem})
+      res.render("propItems/show", {propItem})
     }
   })
 })
+
+// COMMENT Routes
+app.get("/props/:id/comments/new", (req, res) => {
+    PropItem.findById(req.params.id, function(err, propItem) {
+       if(err) {
+           console.log(err);
+       } else {
+           res.render("comments/new", {propItem});
+       }
+    });
+});
+
+app.post("/props/:id/comments", (req, res) => {
+    PropItem.findById(req.params.id, function(err, propItem) {
+       if(err) {
+           console.log(err);
+           res.redirect("/props");
+       } else {
+           // create the new comment
+            Comment.create(req.body.comment, function(err, comment) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    propItem.comments.push(comment);
+                    propItem.save();
+                    res.redirect("/props/" + propItem._id);
+                }
+            });
+       }
+    });
+});
+
 
 app.listen(3000, () => {
   console.log("Server running on port 3000...")

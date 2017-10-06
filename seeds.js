@@ -10,9 +10,9 @@ var data = [
         startingBid: 9000,
     },
     {
-        name: "Bella's dress",
+        name: "Belle's dress",
         image: "https://www.dhresource.com/600x600/f2/albu/g5/M00/19/6F/rBVaI1jTjDyAHAOuAAW60_EjGQs999.jpg",
-        description: "Bella's (Emma Watson) yellow ball dress worn in the Beauty and the Beast movie",
+        description: "Belle's (Emma Watson) yellow ball dress worn in the Beauty and the Beast movie",
         startingBid: 2500,
     },
 ]

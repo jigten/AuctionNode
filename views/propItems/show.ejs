@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
 <h1><%= propItem.name %></h1>
 
@@ -8,6 +8,10 @@
 
 <p><%= propItem.description %></p>
 
+<p>
+    <a class="btn btn-success" href="/props/<%= propItem._id %>/comments/new">Ask a question</a>
+</p>
+
 <% propItem.comments.forEach(function(comment) { %>
     <p>
         <strong><%= comment.author %></strong> - <%= comment.text %>
@@ -15,4 +19,4 @@
 <% }) %>
 
 
-<% include partials/footer %>
+<% include ../partials/footer %>
