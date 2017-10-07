@@ -12,6 +12,8 @@ var data = [
         ],
         description: "Air Mags are the self lacing shoes that are worn by Marty McFly in Back To The Future 2",
         startingBid: 9000,
+        currentBid: 9000,
+        highestBidder: '',
     },
     {
         name: "Belle's dress",
@@ -22,7 +24,20 @@ var data = [
         ],
         description: "Belle's (Emma Watson) yellow ball dress worn in the Beauty and the Beast movie",
         startingBid: 2500,
-    },
+        currentBid: 2500,
+        highestBidder: '',
+    },{
+      name: " Daenerys Targaryen Season 1 Dress",
+      image: [
+        "http://i.ebayimg.com/images/g/onoAAOSw8GhZgaZ4/s-l500.jpg",
+        "http://i.ebayimg.com/images/g/NQ0AAOSw8apZgaZ3/s-l500.jpg",
+        "https://lovelace-media.imgix.net/uploads/695/f3fea1a0-cb3a-0132-9a8b-0e01949ad350.jpg?w=740&h=1115&fit=crop&crop=faces&auto=format&q=70"
+      ],
+      description: "The dress worn by Daenerys Targaryen (Emilia Clarke) in Season 1 of the critically acclaimed TV series, Game Of Thones",
+      startingBid: 6000,
+      currentBid: 6000,
+      highestBidder: '',
+    }
 ]
 
 function seedDB() {

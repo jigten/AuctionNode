@@ -38,10 +38,15 @@ app.get("/props/new", function (req, res) {
 app.post("/props", function (req, res) {
     // get data from form and add to props array
     const name = req.body.name;
-    const image = req.body.image;
+    const image = [
+      req.body.image1,
+      req.body.image2,
+      req.body.image3,
+    ]
     const description = req.body.description;
     const startingBid = req.body.startingBid
-    const newProp = {name, image, description, startingBid}
+    const currentBid = req.body.startingBid
+    const newProp = {name, image, description, startingBid, currentBid}
 
     PropItem.create(newProp, (err, createdProp) => {
       if(err) {
@@ -59,6 +64,16 @@ app.get("/props/:id", (req,res) => {
       console.log(err)
     } else {
       res.render("propItems/show", {propItem})
+    }
+  })
+})
+
+app.get("/props/:id/bid", (req,res) => {
+  PropItem.findById(req.params.id, (err, propItem) => {
+    if(err) {
+      console.log(err)
+    } else {
+      res.render("propItems/bid", {propItem, changeHandler: "detectChange();"})
     }
   })
 })

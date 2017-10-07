@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center;"> Bid for <%= propItem.name %></h1>
+        <h4 style="text-align: center;"> Current highest bid: <%= propItem.currentBid %></h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/props/<%= propItem._id %>/bid" method="POST">
+                <div class="form-group">
+                    <input id="amount" onkeyup="<%= changeHandler %>" onchange="<%= changeHandler %>" class="form-control" type="number" name="amount" placeholder="Bid Amount">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="user" placeholder="User">
+                </div>
+                <div id="button"></div>
+            </form>
+            <a href="/props">Go Back</a>
+        </div>
+    </div>
+</div>
+
+<script>
+  const data = <%- JSON.stringify(propItem) %>
+
+  detectChange = () => {
+      if(document.getElementById("amount").value > data.currentBid) {
+        document.getElementById("button").innerHTML = `<div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block">Submit</button>
+        </div>`
+      } else {
+        document.getElementById("button").innerHTML = `<p><strong>Please enter an amount greater than the current highest bid</strong></p>`
+      }
+  }
+</script>
+
+<% include ../partials/footer %>

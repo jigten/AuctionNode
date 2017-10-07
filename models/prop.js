@@ -6,12 +6,14 @@ const propItemSchema = new mongoose.Schema({
   image: [String],
   description: String,
   startingBid: Number,
+  currentBid: Number,
+  highestBidder: String,
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comment"
     }
-  ]
+  ],
 })
 
 module.exports = mongoose.model("PropItem", propItemSchema)
