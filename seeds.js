@@ -26,8 +26,9 @@ var data = [
         startingBid: 2500,
         currentBid: 2500,
         highestBidder: '',
-    },{
-      name: " Daenerys Targaryen Season 1 Dress",
+    },
+    {
+      name: "Daenerys Targaryen Dress",
       image: [
         "http://i.ebayimg.com/images/g/onoAAOSw8GhZgaZ4/s-l500.jpg",
         "http://i.ebayimg.com/images/g/NQ0AAOSw8apZgaZ3/s-l500.jpg",
@@ -36,6 +37,18 @@ var data = [
       description: "The dress worn by Daenerys Targaryen (Emilia Clarke) in Season 1 of the critically acclaimed TV series, Game Of Thones",
       startingBid: 6000,
       currentBid: 6000,
+      highestBidder: '',
+    },
+    {
+      name: "Don Vito Corleone Revenge Suit",
+      image: [
+        "https://www.thegoldencloset.com/merchant/graphics/00000001/D0003.jpg",
+        "https://www.thegoldencloset.com/merchant/graphics/00000001/D0003e.jpg",
+        "https://www.thegoldencloset.com/merchant/graphics/00000001/D0003h.jpg"
+      ],
+      description: "The suit won by Don Vito Corelone, portrayed by the legendary Robert De Niro, in the iconic revenge scene of Godfather II. Mr. DeNiro wore the suit in a pivotal scene from the film in which a young Vito Corleone returns to his native Italy on a mission to avenge the murder of his father.",
+      startingBid: 15000,
+      currentBid: 15000,
       highestBidder: '',
     }
 ]

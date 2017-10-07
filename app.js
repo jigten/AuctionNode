@@ -78,6 +78,13 @@ app.get("/props/:id/bid", (req,res) => {
   })
 })
 
+app.post("/props/:id/bid", (req,res) => {
+  PropItem.findByIdAndUpdate(req.params.id, {$set: { currentBid: req.body.amount, highestBidder: req.body.user }})
+    .then(() => {
+      res.redirect("/props")
+    })
+})
+
 // COMMENT Routes
 app.get("/props/:id/comments/new", (req, res) => {
     PropItem.findById(req.params.id, function(err, propItem) {
