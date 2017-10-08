@@ -8,6 +8,8 @@ const propItemSchema = new mongoose.Schema({
   startingBid: Number,
   currentBid: Number,
   highestBidder: String,
+  expiryDate: Number,
+  expired: Boolean,
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,

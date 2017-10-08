@@ -2,11 +2,33 @@ const express = require("express"),
   app = express(),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
+  moment = require("moment"),
+  Agenda = require("agenda")
   PropItem = require("./models/prop"),
   Comment = require("./models/comment"),
   seedDB = require("./seeds")
 
 mongoose.connect("mongodb://localhost/tiska")
+
+const agenda = new Agenda({db: {address: "mongodb://localhost/tiska"}})
+agenda.define('expire items', {priority: 'high', concurrency: 1}, function(job, done) {
+  // .. do your db query to reduce the price here
+  PropItem.find({}, (err, props) => {
+    props.forEach((prop) => {
+      if(prop.expiryDate <= (Date.now()/1000)) {
+        PropItem.findByIdAndUpdate(prop._id, {$set: { expired: true }})
+        .then(() => console.log(prop.name, "expired"))    
+      }
+    })
+  })
+  done(); // dont forget to call done!
+});
+
+agenda.on('ready', function() {
+  agenda.every('1 minutes', 'expire items');
+  agenda.start();
+});
+
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine", "ejs")
 app.use(express.static(__dirname+ "/public"))
@@ -24,7 +46,7 @@ app.get("/props", function(req, res) {
       if(err) {
         console.log(err)
       } else {
-        res.render("propItems/index", {props})
+        res.render("propItems/index", {props, moment})
       }
   })
 })
@@ -46,7 +68,8 @@ app.post("/props", function (req, res) {
     const description = req.body.description;
     const startingBid = req.body.startingBid
     const currentBid = req.body.startingBid
-    const newProp = {name, image, description, startingBid, currentBid}
+    const expiryDate = new Date(req.body.expiryDate).getTime() / 1000
+    const newProp = {name, image, description, startingBid, currentBid, expiryDate}
 
     PropItem.create(newProp, (err, createdProp) => {
       if(err) {
@@ -63,7 +86,7 @@ app.get("/props/:id", (req,res) => {
     if(err) {
       console.log(err)
     } else {
-      res.render("propItems/show", {propItem})
+      res.render("propItems/show", {propItem, moment})
     }
   })
 })
@@ -115,7 +138,6 @@ app.post("/props/:id/comments", (req, res) => {
        }
     });
 });
-
 
 app.listen(3000, () => {
   console.log("Server running on port 3000...")

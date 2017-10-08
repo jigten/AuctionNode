@@ -4,7 +4,7 @@
     <header class="jumbotron">
         <div class="container">
             <h1>Welcome to Tiska!</h1>
-            <p>View our extensive of catalog of movie props and costumes!</p>
+            <p>View our extensive catalog of movie props and costumes!</p>
             <p>
                 <a class="btn btn-primary btn-large" href="/props/new">Add an item for auction</a>
             </p>
@@ -23,9 +23,21 @@
                       <h5>Starting Bid: <%= prop.startingBid %> US Dollars</h5>
                       <h5>Current Highest Bid: <%= prop.currentBid %> US Dollars</h5>
                     </p>
-                    <p>
+                    <% if (prop.expired) { %>
+                      <p>
+                        <h5 style="color:red;">Auction Closed</h5>
+                      </p>
+                      <p>
+                        <a href="/props/<%= prop._id %>" class="btn btn-primary">Details</a>
+                      </p>
+                    <% } else { %>
+                      <p>
+                        <h5 style="color:red;">Expires <%= moment.unix(prop.expiryDate).fromNow() %></h5>
+                      </p>
+                      <p>
                         <a href="/props/<%= prop._id %>" class="btn btn-primary">Start Bidding</a>
-                    </p>
+                      </p>
+                    <% } %>
                 </div>
             </div>
          <% }) %>

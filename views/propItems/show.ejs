@@ -24,7 +24,12 @@
           <div class="caption-full">
             <h4 style="width:100%;height:10%;text-align:center;position:relative;top:40%;" class="pull-right"><strong>Higest Bid: <%= propItem.currentBid %> US Dollars </strong> : <%= propItem.highestBidder %></h4>
             <div style="text-align:center">
-              <a style="width:20%;height:10%;text-align:center;position:relative;top:40%;" class="btn btn-primary" href="/props/<%= propItem._id %>/bid">Bid</a>
+              <% if (!propItem.expired) { %>
+                <h5 style="color:red;">Expires on: <%= moment.unix(propItem.expiryDate).format('MM-DD-YYYY') %></h5>
+                <a style="width:20%;height:10%;text-align:center;position:relative;top:40%;" class="btn btn-primary" href="/props/<%= propItem._id %>/bid">Bid</a>
+              <% } else { %>
+                <h5 style="color:red;">Auction Closed</h5>
+              <% } %>
             </div>
             <h4 class="pull-right">Starting at: <%= propItem.startingBid %> US Dollars</h4>
             <h4><a href=""><u><%= propItem.name %></u></a></h4>

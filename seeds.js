@@ -14,6 +14,8 @@ var data = [
         startingBid: 9000,
         currentBid: 9000,
         highestBidder: '',
+        expiryDate: 1508086800,
+        expired: false,
     },
     {
         name: "Belle's dress",
@@ -26,6 +28,8 @@ var data = [
         startingBid: 2500,
         currentBid: 2500,
         highestBidder: '',
+        expiryDate: 1508086800,
+        expired: false,
     },
     {
       name: "Daenerys Targaryen Dress",
@@ -38,6 +42,8 @@ var data = [
       startingBid: 6000,
       currentBid: 6000,
       highestBidder: '',
+      expiryDate: 1508086800,
+      expired: false,
     },
     {
       name: "Don Vito Corleone Revenge Suit",
@@ -50,6 +56,22 @@ var data = [
       startingBid: 15000,
       currentBid: 15000,
       highestBidder: '',
+      expiryDate: 1508086800,
+      expired: false,
+    },
+    {
+      name: "Danny Zuko's T Birds Jacket",
+      image: [
+        "https://www.fjackets.com/product_images/f/630/John_Travolta_Grease_T-Birds_Black_Jacket__84313_zoom.jpg",
+        "https://www.fjackets.com/product_images/b/749/T-Bird_Jacket__99755_zoom.jpg",
+        "http://wardrobeadvice.com/wp-content/uploads/2009/03/Grease-John-Travolta.jpg"
+      ],
+      description: "Danny's (John Travolta) iconic T-birds leather jacket. If you want to groove your dancing move including impressing the ladies with your nice gelled hair, then this T-Birds Jacket is what you must to work this out completely.",
+      startingBid: 3500,
+      currentBid: 3500,
+      highestBidder: '',
+      expiryDate: ((Date.now()/1000) + 60),
+      expired: false,
     }
 ]
 
