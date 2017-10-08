@@ -81,7 +81,7 @@ app.get("/props/:id/bid", (req,res) => {
 app.post("/props/:id/bid", (req,res) => {
   PropItem.findByIdAndUpdate(req.params.id, {$set: { currentBid: req.body.amount, highestBidder: req.body.user }})
     .then(() => {
-      res.redirect("/props")
+      res.redirect(`/props/${req.params.id}`)
     })
 })
 
