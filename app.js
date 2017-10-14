@@ -2,10 +2,13 @@ const express = require("express"),
   app = express(),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
+  passport = require("passport"),
+  LocalStrategy = require("passport-local"),
   moment = require("moment"),
   Agenda = require("agenda")
   PropItem = require("./models/prop"),
   Comment = require("./models/comment"),
+  User = require("./models/user"),
   seedDB = require("./seeds")
 
 mongoose.connect("mongodb://localhost/tiska")
@@ -17,7 +20,7 @@ agenda.define('expire items', {priority: 'high', concurrency: 1}, function(job, 
     props.forEach((prop) => {
       if(prop.expiryDate <= (Date.now()/1000)) {
         PropItem.findByIdAndUpdate(prop._id, {$set: { expired: true }})
-        .then(() => console.log(prop.name, "expired"))    
+        .then(() => console.log(prop.name, "expired"))
       }
     })
   })
@@ -34,11 +37,30 @@ app.set("view engine", "ejs")
 app.use(express.static(__dirname+ "/public"))
 seedDB()
 
+// Passport Configuration
+app.use(require("express-session")({
+    secret: "Auction auction",
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next) {
+    // whatever we put in locals is available in all our templates
+    res.locals.currentUser = req.user;
+    next();
+});
+
+// Routes
+
 app.get("/", function(req, res) {
   res.render("landing")
 })
-
-// Routes
 
 //  INDEX - show all props
 app.get("/props", function(req, res) {
@@ -109,7 +131,7 @@ app.post("/props/:id/bid", (req,res) => {
 })
 
 // COMMENT Routes
-app.get("/props/:id/comments/new", (req, res) => {
+app.get("/props/:id/comments/new", isLoggedIn, (req, res) => {
     PropItem.findById(req.params.id, function(err, propItem) {
        if(err) {
            console.log(err);
@@ -119,7 +141,7 @@ app.get("/props/:id/comments/new", (req, res) => {
     });
 });
 
-app.post("/props/:id/comments", (req, res) => {
+app.post("/props/:id/comments", isLoggedIn, (req, res) => {
     PropItem.findById(req.params.id, function(err, propItem) {
        if(err) {
            console.log(err);
@@ -138,6 +160,53 @@ app.post("/props/:id/comments", (req, res) => {
        }
     });
 });
+
+// AUTH ROUTEs
+
+// show register form
+app.get("/register", function(req, res) {
+    res.render("register")
+})
+
+// handle sign up logic
+app.post("/register", function(req, res) {
+    var newUser = new User({username: req.body.username})
+    User.register(newUser, req.body.password, function (err, user) {
+       if(err) {
+           console.log(err)
+           return res.render("register")
+       }
+       passport.authenticate("local")(req, res, function() {
+           res.redirect("/props")
+       })
+    });
+});
+
+// show login form
+app.get("/login", function (req, res) {
+   res.render("login")
+});
+
+// handling login logic
+app.post("/login", passport.authenticate("local",
+    {
+        successRedirect: "/props",
+        failureRedirect: "/login"
+    }), function (req, res) {
+});
+
+// logout route
+app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/props");
+});
+
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
 
 app.listen(3000, () => {
   console.log("Server running on port 3000...")
