@@ -7,7 +7,13 @@ const propItemSchema = new mongoose.Schema({
   description: String,
   startingBid: Number,
   currentBid: Number,
-  highestBidder: String,
+  highestBidder: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    username: String
+  },
   expiryDate: Number,
   expired: Boolean,
   comments: [

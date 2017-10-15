@@ -28,7 +28,7 @@ var data = [
         startingBid: 2500,
         currentBid: 2500,
         highestBidder: '',
-        expiryDate: 1508086800,
+        expiryDate: 1518110193,
         expired: false,
     },
     {
@@ -42,7 +42,7 @@ var data = [
       startingBid: 6000,
       currentBid: 6000,
       highestBidder: '',
-      expiryDate: 1508086800,
+      expiryDate: 1518110193,
       expired: false,
     },
     {

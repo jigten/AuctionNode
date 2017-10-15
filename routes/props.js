@@ -15,12 +15,12 @@ router.get("/", function(req, res) {
 })
 
 // NEW
-router.get("/new", function (req, res) {
+router.get("/new", isLoggedIn, function (req, res) {
    res.render("propItems/new")
 });
 
 // CREATE
-router.post("/", function (req, res) {
+router.post("/", isLoggedIn, function (req, res) {
     // get data from form and add to props array
     const name = req.body.name;
     const image = [
@@ -54,7 +54,7 @@ router.get("/:id", (req,res) => {
   })
 })
 
-router.get("/:id/bid", (req,res) => {
+router.get("/:id/bid", isLoggedIn, (req,res) => {
   PropItem.findById(req.params.id, (err, propItem) => {
     if(err) {
       console.log(err)
@@ -64,11 +64,24 @@ router.get("/:id/bid", (req,res) => {
   })
 })
 
-router.post("/:id/bid", (req,res) => {
-  PropItem.findByIdAndUpdate(req.params.id, {$set: { currentBid: req.body.amount, highestBidder: req.body.user }})
+router.post("/:id/bid", isLoggedIn, (req,res) => {
+  const currentBid = req.body.amount
+  const highestBidder = {
+    id: req.user._id,
+    username: req.user.username
+  }
+  PropItem.findByIdAndUpdate(req.params.id, {$set: { currentBid, highestBidder }})
     .then(() => {
       res.redirect(`/props/${req.params.id}`)
     })
 })
+
+//  middleware
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
 
 module.exports = router

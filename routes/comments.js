@@ -25,9 +25,12 @@ router.post("/", isLoggedIn, (req, res) => {
                 if(err) {
                     console.log(err)
                 } else {
-                    propItem.comments.push(comment)
-                    propItem.save()
-                    res.redirect("/props/" + propItem._id)
+                  comment.author.id = req.user._id
+                  comment.author.username = req.user.username
+                  comment.save()
+                  propItem.comments.push(comment)
+                  propItem.save()
+                  res.redirect("/props/" + propItem._id)
                 }
             })
        }
