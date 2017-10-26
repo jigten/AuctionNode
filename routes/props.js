@@ -76,6 +76,16 @@ router.post("/:id/bid", isLoggedIn, (req,res) => {
     })
 })
 
+router.get("/:id/checkout", (req,res) => {
+  PropItem.findById(req.params.id, (err, propItem) => {
+    if(err) {
+      console.log(err)
+    } else {
+      res.render("propItems/checkout", {propItem})
+    }
+  })
+})
+
 //  middleware
 function isLoggedIn(req, res, next) {
     if(req.isAuthenticated()) {
