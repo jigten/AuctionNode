@@ -1,3 +1,5 @@
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");
+
 .thumbnail img {
     width: 100%;
 }
@@ -46,4 +48,22 @@ body,html {
   white-space:no-wrap;
   overflow:hidden;
   text-align:center;
+}
+
+.changethisone span{
+    background-color: #FFF;
+}
+
+.changethisone input{
+    border-right-style:none;
+}
+
+.fabutton {
+  background: none;
+  padding: 0px;
+  border: none;
+}
+
+#search {
+  height: 50px;
 }

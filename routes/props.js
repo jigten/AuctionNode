@@ -5,13 +5,24 @@ const express = require("express"),
 
 //  INDEX - show all props
 router.get("/", function(req, res) {
-  PropItem.find({}, (err, props) => {
-      if(err) {
-        console.log(err)
-      } else {
-        res.render("propItems/index", {props, moment})
-      }
-  })
+  if(req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), 'gi')
+    PropItem.find({name: regex}, (err, props) => {
+        if(err) {
+          console.log(err)
+        } else {
+          res.render("propItems/index", {props, moment})
+        }
+    })
+  } else {
+    PropItem.find({}, (err, props) => {
+        if(err) {
+          console.log(err)
+        } else {
+          res.render("propItems/index", {props, moment})
+        }
+    })
+  }
 })
 
 // NEW
@@ -92,6 +103,10 @@ function isLoggedIn(req, res, next) {
         return next();
     }
     res.redirect("/login");
+}
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
 module.exports = router

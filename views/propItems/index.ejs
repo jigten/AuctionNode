@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 
 <div class="container">
-    <!-- <header class="jumbotron">
+    <header class="jumbotron">
         <div class="container">
             <h1>Welcome to Tiska!</h1>
             <p>View our extensive catalog of movie props and costumes!</p>
@@ -9,7 +9,20 @@
                 <a class="btn btn-primary btn-large" href="/props/new">Add an item for auction</a>
             </p>
         </div>
-    </header> -->
+    </header>
+
+    <hr>
+      <form action="/props" method="GET" class="form">
+        <div class="input-group changethisone">
+          <input id="search" type="text" class="form-control" name="search" placeholder="Search Catalog"/>
+          <span class="input-group-addon">
+            <button type="submit" class="fabutton">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </span>
+        </div>
+      </form>
+    <hr>
 
     <div class="row text-center" style="display: flex; flex-wrap: wrap;">
         <% props.forEach(function(prop) { %>
