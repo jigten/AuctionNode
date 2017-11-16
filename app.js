@@ -67,6 +67,6 @@ app.use("/", indexRoutes)
 app.use("/props", propItemRoutes)
 app.use("/props/:id/comments", commentRoutes)
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000...")
+app.listen(process.env.PORT, process.env.IP, () => {
+  console.log("Server up...")
 })
