@@ -16,10 +16,8 @@ var data = [
         highestBidder: '',
         expiryDate: 1508086800,
         expired: false,
-        categories: {
-          gender: "Men",
-          category: "Shoes"
-        },
+        gender: "men",
+        category: "shoes",
     },
     {
         name: "Belle's dress",
@@ -34,10 +32,8 @@ var data = [
         highestBidder: '',
         expiryDate: 1518110193,
         expired: false,
-        categories: {
-          gender: "Women",
-          category: "Dresses & Skirts"
-        },
+        gender: "ladies",
+        category: "dresses",
     },
     {
       name: "Daenerys Targaryen Dress",
@@ -52,10 +48,8 @@ var data = [
       highestBidder: '',
       expiryDate: 1518110193,
       expired: false,
-      categories: {
-        gender: "Women",
-        category: "Dresses & Skirts"
-      },
+      gender: "ladies",
+      category: "dresses",
     },
     {
       name: "Don Vito Corleone Revenge Suit",
@@ -70,10 +64,8 @@ var data = [
       highestBidder: '',
       expiryDate: 1508086800,
       expired: false,
-      categories: {
-        gender: "Men",
-        category: "Suits"
-      },
+      gender: "men",
+      category: "suits",
     },
     {
       name: "Danny Zuko's T Birds Jacket",
@@ -88,10 +80,8 @@ var data = [
       highestBidder: '',
       expiryDate: ((Date.now()/1000) + 60),
       expired: false,
-      categories: {
-        gender: "Men",
-        category: "Jackets & Tops"
-      },
+      gender: "men",
+      category: "jackets",
     }
 ]
 

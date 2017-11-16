@@ -14,6 +14,22 @@ router.get("/", function(req, res) {
           res.render("propItems/index", {props, moment})
         }
     })
+  } else if(req.query.cat) {
+    PropItem.find({gender : req.query.cat}, (err, props) => {
+        if(err) {
+          console.log(err)
+        } else {
+          res.render("propItems/index", {props, moment})
+        }
+    })
+  } else if (req.query.type) {
+    PropItem.find({category : req.query.type}, (err, props) => {
+        if(err) {
+          console.log(err)
+        } else {
+          res.render("propItems/index", {props, moment})
+        }
+    })
   } else {
     PropItem.find({}, (err, props) => {
         if(err) {
@@ -43,7 +59,9 @@ router.post("/", isLoggedIn, function (req, res) {
     const startingBid = req.body.startingBid
     const currentBid = req.body.startingBid
     const expiryDate = new Date(req.body.expiryDate).getTime() / 1000
-    const newProp = {name, image, description, startingBid, currentBid, expiryDate}
+    const category = req.body.category
+    const gender = req.body.gender
+    const newProp = {name, image, description, startingBid, currentBid, expiryDate, category, gender}
 
     PropItem.create(newProp, (err, createdProp) => {
       if(err) {

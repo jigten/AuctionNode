@@ -22,10 +22,8 @@ const propItemSchema = new mongoose.Schema({
       ref: "Comment"
     }
   ],
-  categories: {
-    gender: String,
-    category: String,
-  }
+  gender: String,
+  category: String,
 })
 
 module.exports = mongoose.model("PropItem", propItemSchema)

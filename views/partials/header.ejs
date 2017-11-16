@@ -23,17 +23,47 @@
             </div>
             <ul class="nav navbar-nav">
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
                 <ul class="dropdown-menu">
                   <li class="dropdown-header">Gender</li>
-                  <li><a class="dropdown-item" href="#">Men</a></li>
-                  <li><a class="dropdown-item" href="#">Women</a></li>
+                  <li>
+                    <form id="men_form" method="GET" action="/props">
+                      <input type = "hidden" name = "cat" value = "men" />
+                    </form>
+                    <a class="dropdown-item" href="javascript:{}" onclick="document.getElementById('men_form').submit();">Men</a>
+                  </li>
+                  <li>
+                    <form id="women_form" method="GET" action="/props">
+                      <input type = "hidden" name = "cat" value = "ladies" />
+                    </form>
+                    <a class="dropdown-item" href="javascript:{}" onclick="document.getElementById('women_form').submit();">Women</a>
+                  </li>
                   <li role="seperator" class="dropdown-divider"></li>
                   <li class="dropdown-header">Product Types</li>
-                  <li><a class="dropdown-item" href="#">Shoes</a></li>
-                  <li><a class="dropdown-item" href="#">Suits</a></li>
-                  <li><a class="dropdown-item" href="#">Jackets & Tops</a></li>
-                  <li><a class="dropdown-item" href="#">Dresses & Skirts</a></li>
+                  <li>
+                    <form id="shoes_form" method="GET" action="/props">
+                      <input type = "hidden" name = "type" value = "shoes" />
+                    </form>
+                    <a class="dropdown-item" href="javascript:{}" onclick="document.getElementById('shoes_form').submit();">Shoes</a>
+                  </li>
+                  <li>
+                    <form id="suit_form" method="GET" action="/props">
+                      <input type = "hidden" name = "type" value = "suits" />
+                    </form>
+                    <a class="dropdown-item" href="javascript:{}" onclick="document.getElementById('suit_form').submit();">Suits</a>
+                  </li>
+                  <li>
+                    <form id="jacket_form" method="GET" action="/props">
+                      <input type = "hidden" name = "type" value = "jackets" />
+                    </form>
+                    <a class="dropdown-item" href="javascript:{}" onclick="document.getElementById('jacket_form').submit();">Jackts & Tops</a>
+                  </li>
+                  <li>
+                    <form id="dress_form" method="GET" action="/props">
+                      <input type = "hidden" name = "type" value = "dresses" />
+                    </form>
+                    <a class="dropdown-item" href="javascript:{}" onclick="document.getElementById('dress_form').submit();">Dresses & Skirts</a>
+                  </li>
                 </ul>
               </li>
             </ul>
