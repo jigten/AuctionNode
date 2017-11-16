@@ -16,7 +16,8 @@ const commentRoutes = require("./routes/comments")
       propItemRoutes = require("./routes/props")
       indexRoutes = require("./routes/index")
 
-mongoose.connect("mongodb://localhost/tiska")
+// mongoose.connect("mongodb://localhost/tiska")
+mongoose.connect("mongodb://jigten:awazache@ds111876.mlab.com:11876/tiska")
 
 const agenda = new Agenda({db: {address: "mongodb://localhost/tiska"}})
 agenda.define('expire items', {priority: 'high', concurrency: 1}, function(job, done) {
