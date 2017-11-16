@@ -19,7 +19,7 @@ const commentRoutes = require("./routes/comments")
 // mongoose.connect("mongodb://localhost/tiska")
 mongoose.connect("mongodb://jigten:awazache@ds111876.mlab.com:11876/tiska")
 
-const agenda = new Agenda({db: {address: "mongodb://localhost/tiska"}})
+const agenda = new Agenda({db: {address: "mongodb://jigten:awazache@ds111876.mlab.com:11876/tiska"}})
 agenda.define('expire items', {priority: 'high', concurrency: 1}, function(job, done) {
   // .. do your db query to reduce the price here
   PropItem.find({}, (err, props) => {
